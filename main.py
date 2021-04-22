@@ -41,14 +41,16 @@ class Account:
             print("Desole, Votre solde est insufisant!")
         else:
             print('%s: Retrait $%0.2f.' % (self.name, amount))
-            self.balance = float('%.2f' % (self.balance - amount))  # prevent accumulation error
+            self.balance = float(
+                '%.2f' % (self.balance - amount))  # prevent accumulation error
             self.transactions.append(['w', amount])
             if self.showBalanceAfterTransaction:
                 self.showBalance()
 
     def deposit(self, amount):
         print('%s: depot $%0.2f.' % (self.name, amount))
-        self.balance = float('%.2f' % (self.balance + amount))  # prevent accumulation error
+        self.balance = float(
+            '%.2f' % (self.balance + amount))  # prevent accumulation error
         self.transactions.append(['d', amount])
         if self.showBalanceAfterTransaction:
             self.showBalance()
@@ -74,7 +76,9 @@ class Account:
 
 class Input:
     def getOperation(self):
-        op = input('Entrer d pour un depot, w pour un retrait, t pour une transaction, ou q pour quitter: ')
+        op = input(
+            'Entrer d pour un depot, w pour un retrait, t pour une transaction, ou q pour quitter: '
+        )
         if op not in set('qdwt'):
             print('Operation non permise.  Veuillez reessayer.')
             op = None
@@ -83,7 +87,8 @@ class Input:
     def validateDollarAmount(self, amountStr):
         tooMuchPrecision = re.compile('.*\.\d\d\d.*')
         if tooMuchPrecision.match(str(amountStr)):
-            raise Exception('Vous ne pouvez pas fournir des fractions de cent.')
+            raise Exception(
+                'Vous ne pouvez pas fournir des fractions de cent.')
 
     def getAmount(self):
         amount = None
@@ -115,7 +120,8 @@ class Test:
             self.numPass += 1
             print('%s: OK      solde = %.2f' % (name, actual))
         else:
-            print('%s: ERROR   solde = %.2f, error %.2f' % (name, actual, expected))
+            print('%s: ERROR   solde = %.2f, error %.2f' %
+                  (name, actual, expected))
 
     def summarizeResults(self):
         numFailed = self.numTests - self.numPass
@@ -215,5 +221,6 @@ class App:
 def main():
     App().run()
     sys.exit(0)
+
 
 main()
